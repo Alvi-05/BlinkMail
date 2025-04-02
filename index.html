@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="default-src 'self' https://api.guerrillamail.com https://cdnjs.cloudflare.com ws://127.0.0.1:* wss://127.0.0.1:*; connect-src 'self' https://api.guerrillamail.com ws://127.0.0.1:* wss://127.0.0.1:*; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src https://cdnjs.cloudflare.com; img-src 'self' data: https:;"
+    />
+    <title>Blink Mail</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="icon" href="images/temp-mail-icon.png" type="image/x-icon" />
+
+   
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="icon" href="images/temp-mail-icon.png" type="image/x-icon" />
+    <script id="_wau776">
+      var _wau = _wau || [];
+      _wau.push(["dynamic", "0pakxqe3b2", "776", "c4302bffffff", "small"]);
+    </script>
+    <script async src="//waust.at/d.js"></script>
+  </head>
+
+  <body>
+    <div class="app-container">
+      <div class="theme-switch">
+        <i class="fa-solid fa-moon"></i>
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle" />
+          <span class="slider round"></span>
+        </label>
+        <i class="fa-solid fa-sun"></i>
+      </div>
+
+      <header>
+        <div class="header-content">
+          <div class="ascii-art">
+            <pre>
+                                                                                                  
+            _|_|_|    _|  _|            _|            _|      _|            _|  _|  
+            _|    _|  _|      _|_|_|    _|  _|        _|_|  _|_|    _|_|_|      _|  
+            _|_|_|    _|  _|  _|    _|  _|_|          _|  _|  _|  _|    _|  _|  _|  
+            _|    _|  _|  _|  _|    _|  _|  _|        _|      _|  _|    _|  _|  _|  
+            _|_|_|    _|  _|  _|    _|  _|    _|      _|      _|    _|_|_|  _|  _|  
+                                                                                    
+                                                                         
+            </pre>
+          </div>
+          <div class="system-status">
+            <div id="status-led" class="status-led offline"></div>
+            <span id="status-text">Offline</span>
+          </div>
+        </div>
+      </header>
+
+      
+
+      <main class="main-content">
+        <div class="card">
+          <div class="email-controls">
+            <div class="email-input-group">
+              <i class="fa-solid fa-at input-icon"></i>
+              <input id="addr" placeholder="Email address" readonly />
+              <button
+                onclick="copyEmail()"
+                title="Copy email"
+                class="icon-button"
+              >
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+            <div class="button-group">
+              <button onclick="refreshMail()" class="primary-button">
+                <i class="fa-solid fa-rotate"></i> Load Mail
+              </button>
+              <button onclick="genEmail()" class="primary-button">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> New Address
+              </button>
+            </div>
+            <div class="auto-refresh">
+              <label class="checkbox-label">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <input type="checkbox" id="auto-refresh" />
+                <span>Auto refresh</span>
+              </label>
+              <select id="refresh-interval" class="select-input">
+                <option value="10">10s</option>
+                <option value="30">30s</option>
+                <option value="60">1m</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="search-container">
+            <div class="search-input-group">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                id="email-search"
+                placeholder="Search emails..."
+              />
+            </div>
+          </div>
+
+          <div
+            id="loading-spinner"
+            class="spinner hidden"
+            style="display: none"
+          ></div>
+          <div id="error-message" class="error-message hidden"></div>
+
+          <div class="table-container">
+            <table id="emails">
+              <thead>
+                <tr>
+                  <th><i class="fa-solid fa-hashtag"></i> ID</th>
+                  <th><i class="fa-solid fa-user"></i> From</th>
+                  <th><i class="fa-solid fa-envelope"></i> Subject</th>
+                  <th><i class="fa-solid fa-calendar"></i> Date</th>
+                  <th><i class="fa-solid fa-gear"></i> Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    
+    
+    <script src="js/config.js" type="module"></script>
+    <script src="js/api.js" type="module"></script>
+    <script src="js/theme.js" type="module"></script>
+  </body>
+</html>
