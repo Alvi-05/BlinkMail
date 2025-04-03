@@ -33,4 +33,22 @@
 </table>
 
 </body>
+<script>
+    fetch("http://localhost:3000/admin/logs")
+        .then(response => response.json())
+        .then(data => {
+            let tableBody = document.getElementById("visitLogs");
+            tableBody.innerHTML = "";
+
+            data.forEach(log => {
+                let row = `<tr>
+                    <td>${log.email}</td>
+                    <td>${log.website_url}</td>
+                    <td>${log.timestamp}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error("Error fetching logs:", error));
+</script>
 </html>
