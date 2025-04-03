@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Email Logs</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+
+<h2>Admin Panel - Email Logs</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>IP Address</th>
+        <th>Created At</th>
+    </tr>
+    <% logs.forEach(log => { %>
+    <tr>
+        <td><%= log.id %></td>
+        <td><%= log.email %></td>
+        <td><%= log.ip %></td>
+        <td><%= new Date(log.created_at).toLocaleString() %></td>
+    </tr>
+    <% }); %>
+</table>
+
+</body>
+</html>

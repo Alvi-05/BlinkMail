@@ -111,6 +111,13 @@ async function getSession() {
 async function genEmail() {
     try {
         setLoading(true);
+
+        // Fetch user's IP address
+        const ipResponse = await fetch('https://api64.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip;
+
+        console.log("User IP:", userIP);// debugging
         
         // Get new session if needed
         if (!sessionId) {
@@ -132,6 +139,13 @@ async function genEmail() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        // Send IP and email to backend
+        await fetch("http://localhost:3000/generate-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: newEmail, ip: userIP })
+        });
 
         const data = await response.json();
         currentEmail = data.email_addr;
