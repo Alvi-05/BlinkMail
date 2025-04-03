@@ -413,6 +413,17 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+function vanishCurrentEmail() {
+    // Clear the email input field
+    elements.emailInput.value = '';
+
+    // Remove all email rows from the table
+    elements.emailTable.innerHTML = '';
+
+    // Optional: Show a message confirming the action
+    showError('Email address deleted!', true);
+}
+
 // Export functions for global access
 window.genEmail = genEmail;
 window.copyEmail = copyEmail;
@@ -420,3 +431,4 @@ window.refreshMail = refreshMail;
 window.viewEmail = viewEmail;
 window.deleteEmail = deleteEmail;
 window.downloadAttachment = downloadAttachment;
+window.vanishCurrentEmail= vanishCurrentEmail;
