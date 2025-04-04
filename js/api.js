@@ -141,11 +141,13 @@ async function genEmail() {
         }
 
         // Send IP and email to backend
+        /*
         await fetch("http://localhost:3000/generate-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: newEmail, ip: userIP })
+            body: JSON.stringify({ email: currentEmail, ip: userIP }) //newEmail?
         });
+        */
 
         const data = await response.json();
         currentEmail = data.email_addr;

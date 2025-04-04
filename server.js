@@ -10,7 +10,7 @@ app.use(express.json()); // To parse JSON body requests
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",      // Change if needed
-    password: "",      // Your MySQL password
+    password: "root",      // Your MySQL password
     database: "temp_email_logs"
 });
 
@@ -43,7 +43,7 @@ app.post("/log-visit", (req, res) => {
         return res.status(400).json({ error: "Email and website URL are required" });
     }
 
-    db.query("INSERT INTO email_activity (email, website_url) VALUES (?, ?)", [email, website], (err) => {
+    db.query("INSERT INTO logs (email, website_visited) VALUES (?, ?)", [email, website], (err) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ error: "Database error" });
@@ -54,7 +54,7 @@ app.post("/log-visit", (req, res) => {
 
 // Endpoint to fetch logged website visits for the admin panel
 app.get("/admin/logs", (req, res) => {
-    db.query("SELECT * FROM email_activity ORDER BY timestamp DESC", (err, results) => {
+    db.query("SELECT * FROM logs ORDER BY timestamp DESC", (err, results) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ error: "Database error" });
