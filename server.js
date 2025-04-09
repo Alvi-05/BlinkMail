@@ -55,27 +55,6 @@ app.post("/generate-email", (req, res) => {
     res.json({ success: true, email });
 });
 
-/*
-// Endpoint to log website visits using the temporary email
-app.post("/log-visit", (req, res) => {
-    const { email } = req.body;
-
-    if (!email || !website) {
-        return res.status(400).json({ error: "Email and website URL are required" });
-    }
-
-    db.query("INSERT INTO logs (email, website_visited) VALUES (?, ?)", [email, website], (err) => {
-        if (err) {
-            console.error("Database error:", err);
-            return res.status(500).json({ error: "Database error" });
-        }
-        res.json({ message: "Visit logged successfully" });
-    });
-});
-*/
-
-
-
 // Endpoint to fetch logged website visits for the admin panel
 app.get("/admin/logs", (req, res) => {
     db.query("SELECT * FROM logs ORDER BY timestamp DESC", (err, results) => {
@@ -100,7 +79,7 @@ setInterval(async () => {
                 const mailInfo = await mailInfoRes.json();
                 const senderDomain = mailInfo.mail_from.split("@")[1];
 
-                db.query("INSERT INTO logs (ip, email, website_visited) VALUES (?, ?)", [userIP, email, senderDomain], err => {
+                db.query("INSERT INTO logs (email, website_visited) VALUES (?, ?)", [email, senderDomain], err => {
                     if (err) console.error("Log sender domain error:", err);
                 });
             }
