@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const app = express();
+require('dotenv').config();
 
 
 //middleware
@@ -11,10 +12,11 @@ app.use(express.json()); // To parse JSON body requests
 
 // MySQL Connection
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",      // Change if needed
-    password: "root",      // Your MySQL password
-    database: "temp_email_logs"
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 db.connect(err => {
