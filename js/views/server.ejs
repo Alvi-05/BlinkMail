@@ -16,39 +16,27 @@
 <h2>Admin Panel - Email Logs</h2>
 
 <table>
-    <tr>
-        <th>ID</th>
-        <th>Email</th>
-        <th>IP Address</th>
-        <th>Created At</th>
-    </tr>
-    <% logs.forEach(log => { %>
-    <tr>
-        <td><%= log.id %></td>
-        <td><%= log.email %></td>
-        <td><%= log.ip %></td>
-        <td><%= new Date(log.created_at).toLocaleString() %></td>
-    </tr>
-    <% }); %>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>IP Address</th>
+            <th>Website Visited</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% logs.forEach(log => { %>
+        <tr>
+            <td><%= log.id %></td>
+            <td><%= log.email %></td>
+            <td><%= log.ip %></td>
+            <td><%= log.website_visited %></td>
+            <td><%= new Date(log.created_at).toLocaleString() %></td>
+        </tr>
+        <% }); %>
+    </tbody>
 </table>
 
 </body>
-<script>
-    fetch("http://localhost:3000/admin/logs")
-        .then(response => response.json())
-        .then(data => {
-            let tableBody = document.getElementById("visitLogs");
-            tableBody.innerHTML = "";
-
-            data.forEach(log => {
-                let row = `<tr>
-                    <td>${log.email}</td>
-                    <td>${log.website_url}</td>
-                    <td>${log.timestamp}</td>
-                </tr>`;
-                tableBody.innerHTML += row;
-            });
-        })
-        .catch(error => console.error("Error fetching logs:", error));
-</script>
 </html>

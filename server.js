@@ -1,8 +1,11 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
-
 const app = express();
+
+
+//middleware
+app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json()); // To parse JSON body requests
 
@@ -22,22 +25,40 @@ db.connect(err => {
     console.log("Connected to MySQL");
 });
 
+const activeEmails = {}; //store active sessions
+
+// Middleware to check admin login
+
+// ************ API endpoints ***************
+
 // Endpoint to generate a temporary email and log the user's IP
-app.get("/generate-email", (req, res) => {
-    const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-    const tempEmail = `user${Date.now()}@tempmail.com`;
+app.post("/generate-email", (req, res) => {
+    const userIP = req.headers["x-forwarded-for"] || req.ip || req.socket.remoteAddress;
+    const { email, sid_token } = req.body;
+
+    console.log("Email from frontend:", email);
+    console.log("Detected IP:", userIP);
+    console.log("Session id: ", sid_token)
+    console.log("Received from frontend:", req.body);
+
+    if (!email || !sid_token) {
+        return res.status(400).json({ error: "Email and sid_token are required" });
+    }
+
+    activeEmails[email] = sid_token; // for auto inbox checking
 
     // Insert email and IP into MySQL
-    db.query("INSERT INTO logs (ip, email) VALUES (?, ?)", [userIP, tempEmail], (err) => {
-        if (err) console.error("Database error:", err);
+    db.query("INSERT INTO logs (ip, email, sid_token) VALUES (?, ?, ?)", [userIP, email, sid_token], err => {
+        if (err) console.error("DB insert error:", err);
     });
 
-    res.json({ email: tempEmail });
+    res.json({ success: true, email });
 });
 
+/*
 // Endpoint to log website visits using the temporary email
 app.post("/log-visit", (req, res) => {
-    const { email, website } = req.body;
+    const { email } = req.body;
 
     if (!email || !website) {
         return res.status(400).json({ error: "Email and website URL are required" });
@@ -51,6 +72,9 @@ app.post("/log-visit", (req, res) => {
         res.json({ message: "Visit logged successfully" });
     });
 });
+*/
+
+
 
 // Endpoint to fetch logged website visits for the admin panel
 app.get("/admin/logs", (req, res) => {
@@ -62,20 +86,32 @@ app.get("/admin/logs", (req, res) => {
         res.json(results);
     });
 });
-/*
-app.get("/admin", (req, res) => {
-    db.query("SELECT * FROM logs ORDER BY created_at DESC", (err, results) => {
-        if (err) {
-            console.error("Database error:", err);
-            res.status(500).send("Error retrieving logs");
-            return;
-        }
-        res.render("server", { logs: results });  // Ensure this file is named 'server.ejs'
-    });
-});
- */
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// Automatic inbox checker
+setInterval(async () => {
+    for (const [email, sidToken] of Object.entries(activeEmails)) {
+        try {
+            const inboxRes = await fetch(`https://www.guerrillamail.com/ajax.php?f=get_email_list&offset=0&sid_token=${sidToken}`);
+            const inboxData = await inboxRes.json();
+            const emails = inboxData.list || [];
+
+            for (const mail of emails) {
+                const mailInfoRes = await fetch(`https://www.guerrillamail.com/ajax.php?f=fetch_email&email_id=${mail.mail_id}&sid_token=${sidToken}`);
+                const mailInfo = await mailInfoRes.json();
+                const senderDomain = mailInfo.mail_from.split("@")[1];
+
+                db.query("INSERT INTO logs (ip, email, website_visited) VALUES (?, ?)", [userIP, email, senderDomain], err => {
+                    if (err) console.error("Log sender domain error:", err);
+                });
+            }
+        } catch (err) {
+            console.error("Inbox check failed for:", email, err.message);
+        }
+    }
+}, 60 * 1000); // every 1 minute
+
+
+app.listen(3000, () => console.log("Server running on port 3000")); //server start
 
 
 //node server.js

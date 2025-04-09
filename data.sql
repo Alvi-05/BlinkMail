@@ -5,7 +5,7 @@ CREATE TABLE logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     ip VARCHAR(45) NOT NULL,
+    sid_token VARCHAR(255),
     website_visited TEXT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

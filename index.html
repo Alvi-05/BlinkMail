@@ -17,7 +17,7 @@
 
    
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -28,6 +28,41 @@
       _wau.push(["dynamic", "0pakxqe3b2", "776", "c4302bffffff", "small"]);
     </script>
     <script async src="//waust.at/d.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    .brush-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 100px;
+      font-weight: bold;
+    /*color: #0c2d59;*/
+    color:white;
+    }
+
+   
+        .faq-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 30px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background-color: #black;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 15px;
+            border-top: 1px solid #ccc;
+        }
+    
+  </style>
+  
   </head>
 
   <body>
@@ -44,7 +79,13 @@
       <header>
         <div class="header-content">
           <div class="ascii-art">
-            <pre>
+            <p class="brush-text">Flicker Mail</p>
+            <style>
+              .comic-text {
+                font-family: 'Comic Sans MS', cursive;
+              }
+            </style>
+           <!--- <pre>
                                                                                                   
             _|_|_|    _|  _|            _|            _|      _|            _|  _|  
             _|    _|  _|      _|_|_|    _|  _|        _|_|  _|_|    _|_|_|      _|  
@@ -53,7 +94,7 @@
             _|_|_|    _|  _|  _|    _|  _|    _|      _|      _|    _|_|_|  _|  _|  
                                                                                     
                                                                          
-            </pre>
+            </pre>-->
           </div>
           <div class="system-status">
             <div id="status-led" class="status-led offline"></div>
@@ -61,9 +102,18 @@
           </div>
         </div>
       </header>
-
-      
-
+      <div class="a">
+        <h3>Welcome to Blink Mail.. Your Instant, Secure Disposable Email Solution!!</h3> 
+        <p ><i></i> Tired of spam and unwanted emails? Use <i>Blink Mail</i> to generate a temporary, anonymous email address instantly. Perfect for signing up on websites, testing services, or protecting your real inbox from clutter. No sign-up required, completely free, and messages appear in real-time. Your privacy is our priority — all emails are automatically deleted after a set time.
+          
+         <p> Say goodbye to spam. Say hello to hassle-free email.</p></p>
+        </div>
+      <style>
+        .a{
+          text-align: center;
+          color: white;
+        }
+      </style>
       <main class="main-content">
         <div class="card">
           <div class="email-controls">
@@ -85,7 +135,7 @@
               <button onclick="genEmail()" class="primary-button">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> New Address
               </button>
-              <button onclick="vanishCurrentEmail()" class="primary-button">delete
+              <button onclick="vanishCurrentEmail()" class="primary-button">Delete
               </button>
             </div>
             <div class="auto-refresh">
@@ -140,12 +190,83 @@
       </main>
       <footer>
         <div>
-        <h3>What is Disposable Temporary E-mail?</h3> 
-        <p><i>Disposable email</i> - is a free email service that allows to receive email at a temporary address that self-destructed after a certain time elapses. It is also known by names like : tempmail, 10minutemail, 10minmail, throwaway email, fake-mail , fake email generator, burner mail or trash-mail. Many forums, Wi-Fi owners, websites and blogs ask visitors to register before they can view content, post comments or download something. <i>Blink Mail</i> - is most advanced throwaway email service that helps you avoid spam and stay safe.</p>
+        <h3>About This Service</h3> 
+        <p class="b">
+          Everyone owns an email address each and every hour, for everything from connecting at work, with business prospects, reaching out to friends and colleagues using the email address as an online passport. Nearly 99% of all apps and services we sign-up today required an email address, likewise to most shoppers loyalty cards, contest and offer entries, and more.
+
+We all enjoy having an email address, but getting tons of spam emails each day doesn’t feel comfortable. Furthermore, it’s entirely common for stores to have their databases hacked, leaving your business email address at risk and more likely to end up on spam lists. Still, nothing done online is 100% private. Thus you need to protect your email contact identity and best done using disposable emails address.</p>
+         <br>
+          <h4 class="c">Key Features</h4>
+        
+          <ul style="margin-left: 20px; list-style-type: disc;">
+          <li class="c">Real-time inbox updates</li>
+          
+          <li class="c">No registration or login required</li>
+          
+          <li class="c"> Email expiration timer (e.g., 10–60 mins)</li>
+          
+          <li class="c"> Auto-deletion for complete privacy</li>
+          
+          <li class="c"> 100% free and open-source (if applicable)</li>
+        </ul><br>
+          <h4 class="c">Use Cases</h4>
+          <p class="c"> ✔️ Safe signups on untrusted platforms</p>
+          <p class="c"> ✔️ Quick testing for developers</p>
+          <p class="c"> ✔️ Avoiding  spam in your primary inbox</p>
+          <br>
+          <div class="faq-container">
+            <div class="faq-question" onclick="toggleFAQ()">
+                Why would you need a fake email address?
+            </div>
+            <div class="faq-answer" id="faqAnswer">
+                <p class="b">You must have noted services such as Amazon Prime, Hulu, and Netflix allow limited-time test runs (trials), however, if still determined to use the services, all you need is a disposable email address. Technically, you can extend your trial usage using a different email address linked to your original (genuine) after the trial period expires.</p>
+                <br>
+                <p class="b">An offline or online retailer tends to demand an email address to take advantage of their offers. However, this results in an unwanted deluge of spam promotional emails that you could avoid. A temporary email address makes it easy to cut out those irritating messages you are still receiving.</p>
+                <br>
+                <p class="b">Technically, the idea of a temporary email address conjures up images of black-hat hackers and the underworld internet, but there are convincing reasons to use fake email services.</p>
+                <br>
+                <p class="b">If you are looking for legitimate reasons to use a disposable email address, here are a few:</p>
+                <br>
+                <ul>
+                    <li class="b"><strong>Sign-Up For Store Loyalty Card:</strong> If you don’t want promotional emails from stores advertising new products, use a disposable email address instead of your business email address. This also protects your real email from potential hacks.</li>
+                    <li class="b"><strong>Test Your App:</strong> If you've developed a web app and need to test it, you can create multiple dummy accounts using disposable emails instead of hiring unreliable testers.</li>
+                    <li class="b"><strong>Sign-Up For Double Account With A Web App:</strong> Need a second IFTTT or Twitter account? Use a disposable email instead of managing multiple inboxes.</li>
+                    <li class="b"><strong>Eliminate Spam:</strong> A disposable email address is a great tool against spam, especially for users who frequently access web forms, forums, and discussion groups.</li>
+                </ul>
+            </div>
+        </div>
+    
+        <script>
+            function toggleFAQ() {
+                var answer = document.getElementById("faqAnswer");
+                if (answer.style.display === "none" || answer.style.display === "") {
+                    answer.style.display = "block";
+                } else {
+                    answer.style.display = "none";
+                }
+            }
+        </script>
+          
+<h3 class="d" >Disclaimer</h3>
+          <p>This service is intended for temporary and anonymous email use only. Do not use it for sensitive or personal communication. All messages are deleted after expiration and are not recoverable. </p>
+          <br>
+          
         </div>      
+
       </footer>
       <style>
         footer {
+          text-align: center;
+          color: white;
+        }
+        .b{
+          text-align: center;
+          text-align: justify;
+        }
+        .c{
+          text-align: left;
+        }
+        .d{
           text-align: center;
         }
     </style>

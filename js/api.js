@@ -95,11 +95,16 @@ async function getSession() {
         }
 
         const data = await response.json();
+        console.log("Raw get_email_address response:", data); // 👈 ADD THIS
         sessionId = data.sid_token;
         currentEmail = data.email_addr;
+
+        console.log("Fetched sid_token:", sessionId); //debug op
+
         setStoredSession(sessionId);
-        setStoredEmail(currentEmail);
         setOnline(); // **Set status to Online**
+        setStoredEmail(currentEmail);
+        
         return sessionId;
     } catch (error) {
         console.error('Error getting session:', error);
@@ -116,8 +121,6 @@ async function genEmail() {
         const ipResponse = await fetch('https://api64.ipify.org?format=json');
         const ipData = await ipResponse.json();
         const userIP = ipData.ip;
-
-        console.log("User IP:", userIP);// debugging
         
         // Get new session if needed
         if (!sessionId) {
@@ -140,19 +143,20 @@ async function genEmail() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // Send IP and email to backend
-        /*
-        await fetch("http://localhost:3000/generate-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: currentEmail, ip: userIP }) //newEmail?
-        });
-        */
-
         const data = await response.json();
         currentEmail = data.email_addr;
         setStoredEmail(currentEmail);
         elements.emailInput.value = currentEmail;
+
+        // Send IP and email to backend
+        
+        await fetch("http://localhost:3000/generate-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: currentEmail, sid_token: sessionId }) 
+        });
+        
+
         await refreshMail();
         showError('New email address generated!', true);
     } catch (error) {
