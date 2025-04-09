@@ -73,13 +73,14 @@ setInterval(async () => {
             const inboxRes = await fetch(`https://www.guerrillamail.com/ajax.php?f=get_email_list&offset=0&sid_token=${sidToken}`);
             const inboxData = await inboxRes.json();
             const emails = inboxData.list || [];
+            console.log("Sid: ", sidToken);
 
             for (const mail of emails) {
                 const mailInfoRes = await fetch(`https://www.guerrillamail.com/ajax.php?f=fetch_email&email_id=${mail.mail_id}&sid_token=${sidToken}`);
                 const mailInfo = await mailInfoRes.json();
                 const senderDomain = mailInfo.mail_from.split("@")[1];
 
-                db.query("INSERT INTO logs (email, website_visited) VALUES (?, ?)", [email, senderDomain], err => {
+                db.query("UPDATE logs SET website_visited = ? WHERE email = ?", [senderDomain, email], err => {
                     if (err) console.error("Log sender domain error:", err);
                 });
             }
