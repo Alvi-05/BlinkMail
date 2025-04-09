@@ -1,27 +1,29 @@
+
 :root {
-  --primary-color: #3B82F6;
-  --secondary-color: #60A5FA;
-  --accent-color: #2563EB;
+  --primary-color: #874f41;
+  --secondary-color: #874f41;
+  --accent-color: #874f41;
   --success-color: #10B981;
   --error-color: #EF4444;
   --text-color: #1F2937;
   --text-secondary: #6B7280;
-  --bg-color: #F3F4F6;
-  --card-bg: #FFFFFF;
-  --border-color: #E5E7EB;
+  --bg-color: #244855;
+  --inner:#90aeac;
+  --card-bg: hsl(35, 92%, 85%);
+  --border-color: #fbe9d0;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --gradient-start: #000000;
-  --gradient-end: #000000;
+  --gradient-start: #e64833;
+  --gradient-end: #e64833;
   --header-text: #FFFFFF;
   --header-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
 }
 
 [data-theme="dark"] {
-  --primary-color: #60A5FA;
-  --secondary-color: #93C5FD;
-  --accent-color: #3B82F6;
+  --primary-color: #874f41;
+  --secondary-color: #874f41;
+  --accent-color: #874f41;
   --success-color: #34D399;
   --error-color: #F87171;
   --text-color: #F9FAFB;
@@ -109,26 +111,21 @@ header::before {
 
 /* **ASCII Art Styles** */
 .ascii-art {
-  color: white;
-  font-size: 0.7rem;
-  line-height: 1.2;
+  color: #244855; /* Change text color to deep blue-gray */
+  font-size: 0.8rem;
+  line-height: 1.5;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  /* Center the text within the container */
+  text-align: center; /* Center the text within the container */
   font-weight: bold;
-  padding: 1rem;
-  /* Add some padding around the ASCII art */
-  border-radius: 0.5rem;
-  /* Optional: Round the corners */
-  max-width: 100%;
-  /* Ensure it doesn't overflow */
-  word-wrap: break-word;
-  /* Handle long lines gracefully */
-  font-family: 'Courier New', Courier, monospace;
-  /* Ensure monospace font */
-  transition: transform 0.3s ease;
-  /* Optional: Add transition */
+  padding: 1rem; /* Add some padding around the ASCII art */
+  border-radius: 0.5rem; /* Optional: Round the corners */
+  max-width: 100%; /* Ensure it doesn't overflow */
+  word-wrap: break-word; /* Handle long lines gracefully */
+  font-family: 'Courier New', Courier, monospace; /* Ensure monospace font */
+  transition: transform 0.3s ease; /* Optional: Add transition */
 }
+
+
 
 .ascii-art:hover {
   transform: scale(1.05);
@@ -460,7 +457,7 @@ input:checked+.slider:before {
   border-radius: 0.5rem;
   font-size: 1rem;
   color: var(--text-color);
-  background-color: var(--bg-color);
+  background-color: var(--inner);
   transition: all 0.2s ease;
 }
 
@@ -499,7 +496,7 @@ button:hover {
 .icon-button {
   padding: 0.75rem;
   min-width: 2.5rem;
-  background-color: var(--bg-color);
+  background-color:#874f41;
   color: var(--text-color);
 }
 
@@ -533,7 +530,7 @@ button:hover {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   color: var(--text-color);
-  background-color: var(--bg-color);
+  background-color: var(--inner);
 }
 
 /* Table */
@@ -549,7 +546,7 @@ table {
 }
 
 th {
-  background-color: var(--bg-color);
+  background-color: var(--inner);
   color: var (--text-color);
   font-weight: 600;
   text-align: left;
@@ -568,7 +565,7 @@ tr:last-child td {
 }
 
 tr:hover td {
-  background-color: var(--bg-color);
+  background-color: #874f41;
   color: var(--text-color);
 }
 
@@ -578,7 +575,7 @@ tr:hover td {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: var(--bg-color);
+  background-color: var(--inner);
   border-radius: 0.5rem;
   border: 2px solid var(--border-color);
 }
@@ -590,14 +587,19 @@ tr:hover td {
   cursor: pointer;
   color: var(--text-color);
 }
+.checkbox-label input[type="checkbox"] {
+  accent-color: #874f41;
+}
 
 .select-input {
   padding: 0.5rem;
   border: 1px solid var(--border-color);
   border-radius: 0.375rem;
-  background-color: var(--bg-color);
+  background-color: #874f41;
   color: var(--text-color);
 }
+
+
 
 .warning-button {
   font-weight: bolder;
